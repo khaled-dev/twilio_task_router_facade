@@ -1,0 +1,24 @@
+{
+  "name": "twilio_task_router_facade",
+  "version": "1.0.0",
+  "description": "A facade service for twilio task router",
+  "main": "src/App.ts",
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpile-only src/App.ts",
+    "test": "jest"
+  },
+  "author": "Khaled AbdElrahim",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.1.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.4",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.4"
+  }
+}
