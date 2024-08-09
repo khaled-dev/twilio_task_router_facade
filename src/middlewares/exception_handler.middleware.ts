@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import response from "../controllers/concerns/response";
 import Logger from "../config/logger";
+import {Locale} from "../config/locale";
 
 const exceptionHandlerMiddleware = (
   err: Error,
@@ -13,7 +14,7 @@ const exceptionHandlerMiddleware = (
   }
   Logger.error(err.stack ?? err.message);
 
-  response.error(res, { message: err.message }, "Internal Error", 500);
+  response.error(res, { message: err.message }, Locale.http.Internal, 500);
 };
 
 export default exceptionHandlerMiddleware;

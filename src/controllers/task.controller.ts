@@ -3,23 +3,28 @@ import response from "./concerns/response";
 import taskView from "../views/task.view";
 import taskService from "../services/task.service";
 import { TaskInstance } from "twilio/lib/rest/taskrouter/v1/workspace/task";
+import {Locale} from "../config/locale";
 
-const create = async (req: Request, res: Response): Promise<void> => {
+interface ICreateTaskRequest extends Request {
+  body: {
+    attributes: object
+  }
+}
+
+const create = async (req: ICreateTaskRequest, res: Response): Promise<void> => {
   const workflowSid: string = process.env.TWILIO_WORKFLOW_SID;
 
   let task: TaskInstance;
   try {
-    task = await taskService.createTask(workflowSid, {
-      selected_language: "es",
-    });
+    task = await taskService.createTask(workflowSid, req.body.attributes);
   } catch (err) {
-    response.error(res, { message: err.message }, "Bad Request", err.status);
+    response.error(res, { message: err.message }, Locale.http.badRequest, err.status);
   }
 
   response.success(
     res,
     taskView.one(task),
-    "Task has been created successfully",
+    Locale.tasks.create.success,
   );
 };
 
