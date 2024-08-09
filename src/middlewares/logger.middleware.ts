@@ -4,7 +4,7 @@ import Logger from "../config/logger";
 const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const bodyData: string = JSON.stringify(req.body) ?? "no body";
 
-  Logger.log(`${req.method} ${req.path} - ${bodyData}`);
+  Logger.info(`${req.method} ${req.path} - ${bodyData}`);
 
   next();
 };

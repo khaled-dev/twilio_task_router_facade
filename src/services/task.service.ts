@@ -10,9 +10,9 @@ async function createTask(
   const attributesString: string = JSON.stringify(attributes);
 
   return await twilioClient
-      .getClient()
-      .taskrouter.v1.workspaces(workspaceSid)
-      .tasks.create({ workflowSid, attributes: attributesString });
+    .getClient()
+    .taskrouter.v1.workspaces(workspaceSid)
+    .tasks.create({ workflowSid, attributes: attributesString });
 }
 
 export default { createTask };
