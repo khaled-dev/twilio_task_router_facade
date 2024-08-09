@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import response from "../controllers/concerns/response";
 import Logger from "../config/logger";
-import {Locale} from "../config/locale";
+import { Locale } from "../config/locale";
 
 const exceptionHandlerMiddleware = (
   err: Error,
