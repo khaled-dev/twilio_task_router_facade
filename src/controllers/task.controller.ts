@@ -4,12 +4,7 @@ import taskView from "../views/task.view";
 import taskService from "../services/task.service";
 import { TaskInstance } from "twilio/lib/rest/taskrouter/v1/workspace/task";
 import {Locale} from "../config/locale";
-
-interface ICreateTaskRequest extends Request {
-  body: {
-    attributes: object
-  }
-}
+import {ICreateTaskRequest} from "./requests/iTask";
 
 const create = async (req: ICreateTaskRequest, res: Response): Promise<void> => {
   const workflowSid: string = process.env.TWILIO_WORKFLOW_SID;
