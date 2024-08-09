@@ -1,8 +1,9 @@
-import express, { Express, Request, Response } from "express";
+import express, {Express} from "express";
 import { config } from "dotenv";
-import Logs from "./config/logs";
+import Logger from "./config/logger";
 import taskRoutes from "./routes/task.route";
 import loggerMiddleware from "./middlewares/logger.middleware";
+import exceptionHandlerMiddleware from "./middlewares/exception_handler.middleware";
 
 // load env variables
 config();
@@ -10,19 +11,14 @@ config();
 const server: Express = express();
 const port: number = process.env.SERVER_PORT || 4000;
 
-// add logger middleware
+
+server.use(express.json());
 server.use(loggerMiddleware);
 
-server.get("/", (req: Request, res: Response): void => {
-  res.send("Hello World!");
-});
+server.use("/tasks", taskRoutes);
 
-try {
-  server.use("/tasks", taskRoutes);
-} catch (e) {
-  Logs.error(e);
-}
+server.use(exceptionHandlerMiddleware);
 
 server.listen(port, () => {
-  Logs.info(`Server is running on port ${port}`);
+  Logger.info(`Server is running on port ${port}`);
 });
