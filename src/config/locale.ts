@@ -10,4 +10,10 @@ export const Locale: object = {
       fail: "Fail to create task",
     },
   },
+  workers: {
+    create: {
+      success: "Worker has been created successfully",
+      fail: "Fail to create worker",
+    },
+  },
 };
