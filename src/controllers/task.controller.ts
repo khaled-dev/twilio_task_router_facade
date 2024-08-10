@@ -22,6 +22,8 @@ const create = async (
       Locale.http.badRequest,
       err.status,
     );
+
+    return
   }
 
   response.success(res, taskView.one(task), Locale.tasks.create.success);
