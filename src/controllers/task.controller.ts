@@ -23,7 +23,7 @@ const create = async (
       err.status,
     );
 
-    return
+    return;
   }
 
   response.success(res, taskView.one(task), Locale.tasks.create.success);
