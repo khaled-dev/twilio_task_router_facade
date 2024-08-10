@@ -5,6 +5,7 @@ import workerService from "../services/worker.service";
 import {
   WorkerContext,
   WorkerInstance,
+  WorkerListInstance,
 } from "twilio/lib/rest/taskrouter/v1/workspace/worker";
 import { Locale } from "../config/locale";
 import { ICreateWorkerRequest, IShowWorkerRequest } from "./requests/iWorker";
@@ -36,7 +37,7 @@ const create = async (
 const show = async (req: IShowWorkerRequest, res: Response): Promise<void> => {
   let worker: WorkerContext;
   try {
-    worker = await workerService.find(req.params.sid);
+    worker = await workerService.findBySid(req.params.sid);
   } catch (err) {
     response.error(
       res,
@@ -51,4 +52,26 @@ const show = async (req: IShowWorkerRequest, res: Response): Promise<void> => {
   response.success(res, workerView.one(worker), Locale.workers.show.success);
 };
 
-export default { create, show };
+const index = async (req: Request, res: Response): Promise<void> => {
+  let workers: WorkerListInstance;
+  try {
+    workers = await workerService.all();
+  } catch (err) {
+    response.error(
+      res,
+      { message: err.message },
+      Locale.http.badRequest,
+      err.status,
+    );
+
+    return;
+  }
+
+  response.success(
+    res,
+    await workerView.many(workers),
+    Locale.workers.index.success,
+  );
+};
+
+export default { create, show, index };

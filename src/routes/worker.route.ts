@@ -5,12 +5,12 @@ import { ValidateJoi } from "../middlewares/Joi";
 
 const router = express.Router();
 
+router.get("/", controller.index);
+router.get("/:sid", controller.show);
 router.post(
   "/create",
   ValidateJoi(createWorkerValidationSchema),
   controller.create,
 );
-
-router.get("/:sid", controller.show);
 
 export = router;

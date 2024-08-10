@@ -17,7 +17,11 @@ export const Locale: object = {
     },
     show: {
       success: "Worker response successfully",
-      fail: "Fail to Worker worker",
+      fail: "Fail to show worker",
+    },
+    index: {
+      success: "Worker response successfully",
+      fail: "Fail to list worker",
     },
   },
 };
