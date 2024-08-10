@@ -6,3 +6,9 @@ export interface ICreateWorkerRequest extends Request {
     friendly_name: string;
   };
 }
+
+export interface IShowWorkerRequest extends Request {
+  params: {
+    sid: string;
+  };
+}

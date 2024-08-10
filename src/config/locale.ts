@@ -15,5 +15,9 @@ export const Locale: object = {
       success: "Worker has been created successfully",
       fail: "Fail to create worker",
     },
+    show: {
+      success: "Worker response successfully",
+      fail: "Fail to Worker worker",
+    },
   },
 };

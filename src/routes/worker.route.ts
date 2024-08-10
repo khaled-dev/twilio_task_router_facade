@@ -11,4 +11,6 @@ router.post(
   controller.create,
 );
 
+router.get("/:sid", controller.show);
+
 export = router;
