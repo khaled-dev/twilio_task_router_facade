@@ -23,5 +23,9 @@ export const Locale: object = {
       success: "Worker response successfully",
       fail: "Fail to list worker",
     },
+    token: {
+      success: "Worker token generated successfully",
+      fail: "Fail to generate worker token",
+    },
   },
 };

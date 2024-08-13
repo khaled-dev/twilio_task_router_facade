@@ -4,6 +4,7 @@ import {
   WorkerInstance,
   WorkerListInstance,
 } from "twilio/lib/rest/taskrouter/v1/workspace/worker";
+import { workerCapability } from "./utilities /workerCapability.utility";
 
 async function createWorker(
   friendlyName: string,
@@ -40,4 +41,8 @@ async function all(): Promise<WorkerListInstance> {
     .workers;
 }
 
-export default { createWorker, findBySid, all };
+function generateToken(workerSid: string): string {
+  return workerCapability.build(workerSid);
+}
+
+export default { createWorker, findBySid, all, generateToken };

@@ -12,5 +12,6 @@ router.post(
   ValidateJoi(createWorkerValidationSchema),
   controller.create,
 );
+router.get("/:sid/token", controller.generateToken);
 
 export = router;

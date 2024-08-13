@@ -74,4 +74,25 @@ const index = async (req: Request, res: Response): Promise<void> => {
   );
 };
 
-export default { create, show, index };
+const generateToken = (
+  req: IShowWorkerRequest,
+  res: Response,
+): Promise<void> => {
+  let worker: string;
+  try {
+    worker = workerService.generateToken(req.params.sid);
+  } catch (err) {
+    response.error(
+      res,
+      { message: err.message },
+      Locale.http.badRequest,
+      err.status,
+    );
+
+    return;
+  }
+
+  response.success(res, { workerToken: worker }, Locale.workers.show.success);
+};
+
+export default { create, show, index, generateToken };
