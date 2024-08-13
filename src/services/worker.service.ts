@@ -45,4 +45,15 @@ function generateToken(workerSid: string): string {
   return workerCapability.build(workerSid);
 }
 
-export default { createWorker, findBySid, all, generateToken };
+async function destroy(workerId: string): Promise<boolean> {
+  const twilioClient: TwilioClient = TwilioClient.getInstance();
+  const workspaceSid: string = process.env.TWILIO_WORKSPACE_SID;
+
+  return twilioClient
+    .getClient()
+    .taskrouter.v1.workspaces(workspaceSid)
+    .workers.get(workerId)
+    .remove();
+}
+
+export default { createWorker, findBySid, all, generateToken, destroy };

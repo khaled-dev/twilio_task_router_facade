@@ -13,5 +13,6 @@ router.post(
   controller.create,
 );
 router.get("/:sid/token", controller.generateToken);
+router.delete("/:sid", controller.destroy);
 
 export = router;

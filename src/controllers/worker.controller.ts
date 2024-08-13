@@ -95,4 +95,25 @@ const generateToken = (
   response.success(res, { workerToken: worker }, Locale.workers.show.success);
 };
 
-export default { create, show, index, generateToken };
+const destroy = async (
+  req: IShowWorkerRequest,
+  res: Response,
+): Promise<void> => {
+  let isDeleted: boolean;
+  try {
+    isDeleted = await workerService.destroy(req.params.sid);
+  } catch (err) {
+    response.error(
+      res,
+      { message: err.message },
+      Locale.http.badRequest,
+      err.status,
+    );
+
+    return;
+  }
+
+  response.success(res, { isDeleted: isDeleted }, Locale.workers.show.success);
+};
+
+export default { create, show, index, generateToken, destroy };
