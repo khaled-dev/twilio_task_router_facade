@@ -37,5 +37,13 @@ export const Locale = {
       success: "Worker token generated successfully",
       fail: "Fail to generate worker token",
     },
+    delete: {
+      success: "Worker has been delete successfully",
+      fail: "Fail to delete worker",
+    },
+    activity: {
+      success: "Worker's activity has been updated successfully",
+      fail: "Fail to update worker's activity",
+    },
   },
 };

@@ -113,7 +113,11 @@ const destroy = async (
     return;
   }
 
-  response.success(res, { isDeleted: isDeleted }, Locale.workers.show.success);
+  response.success(
+    res,
+    { isDeleted: isDeleted },
+    Locale.workers.delete.success,
+  );
 };
 
 const changeActivity = async (
@@ -137,7 +141,11 @@ const changeActivity = async (
     return;
   }
 
-  response.success(res, workerView.one(worker), Locale.workers.show.success);
+  response.success(
+    res,
+    workerView.one(worker),
+    Locale.workers.activity.success,
+  );
 };
 
 export default { create, show, index, generateToken, destroy, changeActivity };

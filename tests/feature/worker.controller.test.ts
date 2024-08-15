@@ -5,7 +5,10 @@ import workerService from "../../src/services/worker.service";
 import response from "../../src/controllers/concerns/response";
 import workerView from "../../src/views/worker.view";
 import { ValidateJoi } from "../../src/middlewares/Joi";
-import { createWorkerValidationSchema } from "../../src/middlewares/validations/worker.validation.schema";
+import {
+  changeWorkerActivityValidationSchema,
+  createWorkerValidationSchema,
+} from "../../src/middlewares/validations/worker.validation.schema";
 import { Locale } from "../../src/config/locale";
 
 jest.mock("../../src/services/worker.service", () => ({
@@ -13,6 +16,8 @@ jest.mock("../../src/services/worker.service", () => ({
   find: jest.fn(),
   create: jest.fn(),
   generateToken: jest.fn(),
+  destroy: jest.fn(),
+  updateActivity: jest.fn(),
 }));
 
 jest.spyOn(response, "success");
@@ -32,7 +37,13 @@ describe("Worker Controller", () => {
       controller.create,
     );
     app.get("/workers/:sid", controller.show);
+    app.delete("/workers/:sid", controller.destroy);
     app.get("/workers/:sid/token", controller.generateToken);
+    app.put(
+      "/workers/:sid/change-activity",
+      ValidateJoi(changeWorkerActivityValidationSchema),
+      controller.changeActivity,
+    );
   });
 
   afterAll(() => {
@@ -63,7 +74,7 @@ describe("Worker Controller", () => {
       .get("/workers/" + mockworker.sid)
       .expect(200)
       .then(() => {
-        expect(workerService.find).toHaveBeenCalled();
+        expect(workerService.find).toHaveBeenCalledWith(mockworker.sid);
         expect(response.success).toHaveBeenCalled();
         expect(workerView.one).toHaveBeenCalledWith(
           expect.objectContaining(mockworker),
@@ -89,6 +100,10 @@ describe("Worker Controller", () => {
       .send(mockReqBody)
       .expect(200)
       .then(() => {
+        expect(workerService.create).toHaveBeenCalledWith(
+          "test name",
+          mockAttributes,
+        );
         expect(response.success).toHaveBeenCalled();
         expect(workerView.one).toHaveBeenCalledWith(
           expect.objectContaining({
@@ -118,6 +133,46 @@ describe("Worker Controller", () => {
             status: 200,
           }),
         );
+      });
+  });
+
+  it("should delete a worker", async () => {
+    const mockIsDeleted = true; // Assuming successful deletion
+    (workerService.destroy as jest.Mock).mockResolvedValue(mockIsDeleted);
+
+    await request(app)
+      .delete("/workers/WK1234567890")
+      .expect(200)
+      .then((res) => {
+        expect(workerService.destroy).toHaveBeenCalledWith("WK1234567890");
+        expect(res.text).toBe(
+          JSON.stringify({
+            message: Locale.workers.delete.success,
+            data: { isDeleted: true },
+            status: 200,
+          }),
+        );
+      });
+  });
+
+  it("should change the activity of a worker", async () => {
+    const mockWorker = { sid: "WK1234567890" }; // Assuming successful update
+    (workerService.updateActivity as jest.Mock).mockResolvedValue(mockWorker);
+
+    await request(app)
+      .put("/workers/WK1234567890/change-activity")
+      .send({ activitySid: "ACT67890" }) // Assuming this is the payload structure
+      .expect(200)
+      .then(() => {
+        expect(workerService.updateActivity).toHaveBeenCalledWith(
+          "WK1234567890",
+          "ACT67890",
+        );
+
+        // expect(response.success).toHaveBeenCalled();
+        // expect(workerView.one).toHaveBeenCalledWith(
+        //     expect.objectContaining(mockWorker),
+        // );
       });
   });
 });

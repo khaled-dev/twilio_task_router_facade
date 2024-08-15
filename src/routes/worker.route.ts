@@ -12,7 +12,7 @@ router.get("/", controller.index);
 router.get("/:sid", controller.show);
 router.post("/", ValidateJoi(createWorkerValidationSchema), controller.create);
 router.put(
-  "/change-activity/:sid",
+  "/:sid/change-activity",
   ValidateJoi(changeWorkerActivityValidationSchema),
   controller.changeActivity,
 );
