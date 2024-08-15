@@ -10,7 +10,7 @@ const create = async (
   req: ICreateTaskRequest,
   res: Response,
 ): Promise<void> => {
-  const workflowSid: string = process.env.TWILIO_WORKFLOW_SID;
+  const workflowSid: string = process.env.TWILIO_WORKFLOW_SID!;
 
   let task: TaskInstance;
   try {
@@ -26,7 +26,7 @@ const create = async (
     return;
   }
 
-  response.success(res, taskView.one(task), Locale.tasks.create.success);
+  response.success(res, taskView.one(task), 'Locale.tasks.create.success');
 };
 
 export default { create };

@@ -6,7 +6,7 @@ import { ValidateJoi } from "../middlewares/Joi";
 const router = express.Router();
 
 router.post(
-  "/create",
+  "/",
   ValidateJoi(createTaskValidationSchema),
   controller.create,
 );

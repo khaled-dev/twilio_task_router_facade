@@ -9,7 +9,7 @@ import {
 } from "twilio/lib/rest/taskrouter/v1/workspace/worker";
 import { Locale } from "../config/locale";
 import {
-  ICreateWorkerRequest,
+  ICreateWorkerRequest, IIndexWorkerRequest,
   IShowWorkerRequest,
   IUpdateWorkerActivityRequest,
 } from "./requests/iWorker";
@@ -39,7 +39,7 @@ const create = async (
 };
 
 const show = async (req: IShowWorkerRequest, res: Response): Promise<void> => {
-  let worker: WorkerContext;
+  let worker: WorkerInstance;
   try {
     worker = await workerService.findBySid(req.params.sid);
   } catch (err) {
@@ -56,7 +56,7 @@ const show = async (req: IShowWorkerRequest, res: Response): Promise<void> => {
   response.success(res, workerView.one(worker), Locale.workers.show.success);
 };
 
-const index = async (req: Request, res: Response): Promise<void> => {
+const index = async (req: IIndexWorkerRequest, res: Response): Promise<void> => {
   let workers: WorkerListInstance;
   try {
     workers = await workerService.all();

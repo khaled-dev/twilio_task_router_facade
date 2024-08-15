@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/", controller.index);
 router.get("/:sid", controller.show);
 router.post(
-  "/create",
+  "/",
   ValidateJoi(createWorkerValidationSchema),
   controller.create,
 );

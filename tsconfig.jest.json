@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "noEmit": true,
+        "strict": false,
+        "esModuleInterop": true
+    }
+}

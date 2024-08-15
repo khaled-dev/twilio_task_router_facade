@@ -12,11 +12,11 @@ import { authMiddleware } from "./middlewares/auth.middleware";
 config();
 
 const server: Express = express();
-const port: number = process.env.SERVER_PORT || 4000;
+const port: string = process.env.SERVER_PORT!;
 
 server.use(express.json());
 server.use(loggerMiddleware);
-server.use(authMiddleware);
+// server.use(authMiddleware);
 
 server.use("/tasks", taskRoutes);
 server.use("/workers", workerRoutes);
@@ -27,3 +27,6 @@ server.use(exceptionHandlerMiddleware);
 server.listen(port, () => {
   Logger.info(`Server is running on port ${port}`);
 });
+
+export default server
+
