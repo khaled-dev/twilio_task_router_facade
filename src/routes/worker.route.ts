@@ -1,6 +1,9 @@
 import express from "express";
 import controller from "../controllers/worker.controller";
-import { createWorkerValidationSchema } from "../middlewares/validations/worker.validation.schema";
+import {
+  changeWorkerActivityValidationSchema,
+  createWorkerValidationSchema,
+} from "../middlewares/validations/worker.validation.schema";
 import { ValidateJoi } from "../middlewares/Joi";
 
 const router = express.Router();
@@ -11,6 +14,11 @@ router.post(
   "/create",
   ValidateJoi(createWorkerValidationSchema),
   controller.create,
+);
+router.put(
+  "/change-activity/:sid",
+  ValidateJoi(changeWorkerActivityValidationSchema),
+  controller.changeActivity,
 );
 router.get("/:sid/token", controller.generateToken);
 router.delete("/:sid", controller.destroy);

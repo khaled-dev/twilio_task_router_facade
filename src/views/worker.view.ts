@@ -1,10 +1,9 @@
 import {
-  WorkerContext,
   WorkerInstance,
   WorkerListInstance,
 } from "twilio/lib/rest/taskrouter/v1/workspace/worker";
 
-const one = (worker: WorkerInstance | WorkerContext): object => {
+const one = (worker: WorkerInstance): object => {
   return {
     worker,
   };

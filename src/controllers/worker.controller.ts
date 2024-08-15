@@ -8,7 +8,11 @@ import {
   WorkerListInstance,
 } from "twilio/lib/rest/taskrouter/v1/workspace/worker";
 import { Locale } from "../config/locale";
-import { ICreateWorkerRequest, IShowWorkerRequest } from "./requests/iWorker";
+import {
+  ICreateWorkerRequest,
+  IShowWorkerRequest,
+  IUpdateWorkerActivityRequest,
+} from "./requests/iWorker";
 
 const create = async (
   req: ICreateWorkerRequest,
@@ -116,4 +120,28 @@ const destroy = async (
   response.success(res, { isDeleted: isDeleted }, Locale.workers.show.success);
 };
 
-export default { create, show, index, generateToken, destroy };
+const changeActivity = async (
+  req: IUpdateWorkerActivityRequest,
+  res: Response,
+): Promise<void> => {
+  let worker: WorkerInstance;
+  try {
+    worker = await workerService.updateActivity(
+      req.params.sid,
+      req.body.activitySid,
+    );
+  } catch (err) {
+    response.error(
+      res,
+      { message: err.message },
+      Locale.http.badRequest,
+      err.status,
+    );
+
+    return;
+  }
+
+  response.success(res, workerView.one(worker), Locale.workers.show.success);
+};
+
+export default { create, show, index, generateToken, destroy, changeActivity };

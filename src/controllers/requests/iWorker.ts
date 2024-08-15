@@ -12,3 +12,12 @@ export interface IShowWorkerRequest extends Request {
     sid: string;
   };
 }
+
+export interface IUpdateWorkerActivityRequest extends Request {
+  params: {
+    sid: string;
+  };
+  body: {
+    activitySid: string;
+  };
+}
