@@ -1,11 +1,8 @@
 import TwilioClient from "./twilio.singleton";
-import {
-  WorkerInstance,
-  WorkerListInstance,
-} from "twilio/lib/rest/taskrouter/v1/workspace/worker";
+import { WorkerInstance } from "twilio/lib/rest/taskrouter/v1/workspace/worker";
 import { workerCapability } from "./utilities /workerCapability.utility";
 
-async function createWorker(
+async function create(
   friendlyName: string,
   attributes: object,
 ): Promise<WorkerInstance> {
@@ -22,7 +19,7 @@ async function createWorker(
 
 // find worker by sid
 // NOTE: you can also find by name, get all workers then use each method to filter by any attribute
-async function findBySid(workerId: string): Promise<WorkerInstance> {
+async function find(workerId: string): Promise<WorkerInstance> {
   const twilioClient: TwilioClient = TwilioClient.getInstance();
   const workspaceSid: string = process.env.TWILIO_WORKSPACE_SID;
 
@@ -33,12 +30,14 @@ async function findBySid(workerId: string): Promise<WorkerInstance> {
     .fetch();
 }
 
-async function all(): Promise<WorkerListInstance> {
+async function all(): Promise<WorkerInstance[]> {
   const twilioClient: TwilioClient = TwilioClient.getInstance();
   const workspaceSid: string = process.env.TWILIO_WORKSPACE_SID;
 
-  return twilioClient.getClient().taskrouter.v1.workspaces(workspaceSid)
-    .workers;
+  return twilioClient
+    .getClient()
+    .taskrouter.v1.workspaces(workspaceSid)
+    .workers.list();
 }
 
 function generateToken(workerSid: string): string {
@@ -78,8 +77,8 @@ async function update(
 }
 
 export default {
-  createWorker,
-  findBySid,
+  create,
+  find,
   all,
   generateToken,
   destroy,

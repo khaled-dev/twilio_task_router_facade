@@ -1,7 +1,4 @@
-import {
-  WorkerInstance,
-  WorkerListInstance,
-} from "twilio/lib/rest/taskrouter/v1/workspace/worker";
+import { WorkerInstance } from "twilio/lib/rest/taskrouter/v1/workspace/worker";
 
 const one = (worker: WorkerInstance): object => {
   return {
@@ -9,14 +6,8 @@ const one = (worker: WorkerInstance): object => {
   };
 };
 
-const many = async (workers: WorkerListInstance): Promise<WorkerInstance[]> => {
-  const workersList: WorkerInstance[] = [];
-
-  await workers.each((worker: WorkerInstance): void => {
-    workersList.push(worker);
-  });
-
-  return workersList;
+const many = async (workers: WorkerInstance[]): Promise<WorkerInstance[]> => {
+  return workers;
 };
 
 export default { one, many };

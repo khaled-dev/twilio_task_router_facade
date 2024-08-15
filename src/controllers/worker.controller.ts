@@ -2,10 +2,7 @@ import { Response, Request } from "express";
 import response from "./concerns/response";
 import workerView from "../views/worker.view";
 import workerService from "../services/worker.service";
-import {
-  WorkerInstance,
-  WorkerListInstance,
-} from "twilio/lib/rest/taskrouter/v1/workspace/worker";
+import { WorkerInstance } from "twilio/lib/rest/taskrouter/v1/workspace/worker";
 import { Locale } from "../config/locale";
 import {
   ICreateWorkerRequest,
@@ -19,7 +16,7 @@ const create = async (
 ): Promise<void> => {
   let worker: WorkerInstance;
   try {
-    worker = await workerService.createWorker(
+    worker = await workerService.create(
       req.body.friendly_name,
       req.body.attributes,
     );
@@ -40,7 +37,7 @@ const create = async (
 const show = async (req: IShowWorkerRequest, res: Response): Promise<void> => {
   let worker: WorkerInstance;
   try {
-    worker = await workerService.findBySid(req.params.sid);
+    worker = await workerService.find(req.params.sid);
   } catch (err) {
     response.error(
       res,
@@ -56,7 +53,7 @@ const show = async (req: IShowWorkerRequest, res: Response): Promise<void> => {
 };
 
 const index = async (req: Request, res: Response): Promise<void> => {
-  let workers: WorkerListInstance;
+  let workers: WorkerInstance[];
   try {
     workers = await workerService.all();
   } catch (err) {
@@ -95,7 +92,7 @@ const generateToken = (
     return;
   }
 
-  response.success(res, { workerToken: worker }, Locale.workers.show.success);
+  response.success(res, { workerToken: worker }, Locale.workers.token.success);
 };
 
 const destroy = async (

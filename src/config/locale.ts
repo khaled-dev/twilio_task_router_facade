@@ -1,46 +1,4 @@
-export interface ILocale {
-  http: {
-    badRequest: string;
-    Unauthorized: string;
-    Internal: string;
-  };
-  tasks: {
-    create: {
-      success: string;
-      fail: string;
-    };
-  };
-  activities: {
-    show: {
-      success: string;
-      fail: string;
-    };
-    index: {
-      success: string;
-      fail: string;
-    };
-  };
-  workers: {
-    create: {
-      success: string;
-      fail: string;
-    };
-    show: {
-      success: string;
-      fail: string;
-    };
-    index: {
-      success: string;
-      fail: string;
-    };
-    token: {
-      success: string;
-      fail: string;
-    };
-  };
-}
-
-export const Locale: ILocale = {
+export const Locale = {
   http: {
     badRequest: "Bad Request",
     Unauthorized: "Unauthorized",
