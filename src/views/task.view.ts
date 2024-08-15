@@ -1,4 +1,4 @@
-import {TaskInstance} from "twilio/lib/rest/taskrouter/v1/workspace/task";
+import { TaskInstance } from "twilio/lib/rest/taskrouter/v1/workspace/task";
 
 const one = (task: TaskInstance): object => {
   return {

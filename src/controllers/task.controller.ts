@@ -26,7 +26,7 @@ const create = async (
     return;
   }
 
-  response.success(res, taskView.one(task), 'Locale.tasks.create.success');
+  response.success(res, taskView.one(task), "Locale.tasks.create.success");
 };
 
 export default { create };

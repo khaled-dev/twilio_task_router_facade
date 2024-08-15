@@ -3,7 +3,11 @@ import { NextFunction, Request, Response } from "express";
 import response from "../controllers/concerns/response";
 
 export const ValidateJoi = (schema: ObjectSchema) => {
-  return async (req: Request, res: Response, next: NextFunction): Promise<void|any> => {
+  return async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void | any> => {
     try {
       await schema.validateAsync(req.body);
 

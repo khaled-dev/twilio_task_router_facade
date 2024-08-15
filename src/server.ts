@@ -28,5 +28,4 @@ server.listen(port, () => {
   Logger.info(`Server is running on port ${port}`);
 });
 
-export default server
-
+export default server;

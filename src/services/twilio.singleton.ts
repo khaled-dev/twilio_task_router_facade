@@ -1,6 +1,6 @@
 import { Twilio } from "twilio";
 
-class TwilioClient  {
+class TwilioClient {
   private static instance: TwilioClient | null = null;
   private readonly client: Twilio;
 

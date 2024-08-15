@@ -10,11 +10,7 @@ const router = express.Router();
 
 router.get("/", controller.index);
 router.get("/:sid", controller.show);
-router.post(
-  "/",
-  ValidateJoi(createWorkerValidationSchema),
-  controller.create,
-);
+router.post("/", ValidateJoi(createWorkerValidationSchema), controller.create);
 router.put(
   "/change-activity/:sid",
   ValidateJoi(changeWorkerActivityValidationSchema),
