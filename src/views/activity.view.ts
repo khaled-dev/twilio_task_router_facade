@@ -6,7 +6,7 @@ const one = (activity: ActivityInstance): object => {
   };
 };
 
-const many = (activities: ActivityInstance[]): ActivityInstance[] => {
+const many = (activities: ActivityInstance[] | any): ActivityInstance[] => {
   return activities;
 };
 
