@@ -1,8 +1,8 @@
-import {ActivityInstance} from "twilio/lib/rest/taskrouter/v1/workspace/activity";
+import { ActivityInstance } from "twilio/lib/rest/taskrouter/v1/workspace/activity";
 
 const one = (activity: ActivityInstance): object => {
   return {
-    activity
+    activity,
   };
 };
 
