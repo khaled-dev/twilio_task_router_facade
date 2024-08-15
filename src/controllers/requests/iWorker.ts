@@ -7,8 +7,6 @@ export interface ICreateWorkerRequest extends Request {
   };
 }
 
-export interface IIndexWorkerRequest extends Request {}
-
 export interface IShowWorkerRequest extends Request {
   params: {
     sid: string;

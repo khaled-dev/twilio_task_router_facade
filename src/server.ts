@@ -16,7 +16,7 @@ const port: string = process.env.SERVER_PORT!;
 
 server.use(express.json());
 server.use(loggerMiddleware);
-// server.use(authMiddleware);
+server.use(authMiddleware);
 
 server.use("/tasks", taskRoutes);
 server.use("/workers", workerRoutes);

@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Response, Request } from "express";
 import response from "./concerns/response";
 import workerView from "../views/worker.view";
 import workerService from "../services/worker.service";
@@ -9,7 +9,6 @@ import {
 import { Locale } from "../config/locale";
 import {
   ICreateWorkerRequest,
-  IIndexWorkerRequest,
   IShowWorkerRequest,
   IUpdateWorkerActivityRequest,
 } from "./requests/iWorker";
@@ -56,10 +55,7 @@ const show = async (req: IShowWorkerRequest, res: Response): Promise<void> => {
   response.success(res, workerView.one(worker), Locale.workers.show.success);
 };
 
-const index = async (
-  req: IIndexWorkerRequest,
-  res: Response,
-): Promise<void> => {
+const index = async (req: Request, res: Response): Promise<void> => {
   let workers: WorkerListInstance;
   try {
     workers = await workerService.all();
