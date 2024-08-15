@@ -1,12 +1,12 @@
 import { Twilio } from "twilio";
 
-class TwilioClient {
+class TwilioClient  {
   private static instance: TwilioClient | null = null;
   private readonly client: Twilio;
 
-  private constructor() {
-    const accountSid: string = process.env.TWILIO_ACCOUNT_SID;
-    const authToken: string = process.env.TWILIO_AUTH_TOKEN;
+  public constructor() {
+    const accountSid: string = process.env.TWILIO_ACCOUNT_SID!;
+    const authToken: string = process.env.TWILIO_AUTH_TOKEN!;
 
     if (!accountSid || !authToken) {
       throw new Error("Please set TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN");

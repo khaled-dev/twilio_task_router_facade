@@ -6,7 +6,7 @@ async function create(
   attributes: object,
 ): Promise<TaskInstance> {
   const twilioClient: TwilioClient = TwilioClient.getInstance();
-  const workspaceSid: string = process.env.TWILIO_WORKSPACE_SID;
+  const workspaceSid: string = process.env.TWILIO_WORKSPACE_SID!;
   const attributesString: string = JSON.stringify(attributes);
 
   return await twilioClient
