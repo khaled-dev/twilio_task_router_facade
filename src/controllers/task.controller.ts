@@ -14,7 +14,7 @@ const create = async (
 
   let task: TaskInstance;
   try {
-    task = await taskService.createTask(workflowSid, req.body.attributes);
+    task = await taskService.create(workflowSid, req.body.attributes);
   } catch (err) {
     response.error(
       res,

@@ -1,7 +1,7 @@
 import TwilioClient from "./twilio.singleton";
 import { TaskInstance } from "twilio/lib/rest/taskrouter/v1/workspace/task";
 
-async function createTask(
+async function create(
   workflowSid: string,
   attributes: object,
 ): Promise<TaskInstance> {
@@ -15,4 +15,4 @@ async function createTask(
     .tasks.create({ workflowSid, attributes: attributesString });
 }
 
-export default { createTask };
+export default { create };
