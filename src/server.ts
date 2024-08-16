@@ -7,6 +7,7 @@ import activityRoutes from "./routes/activity.route";
 import loggerMiddleware from "./middlewares/logger.middleware";
 import exceptionHandlerMiddleware from "./middlewares/exception_handler.middleware";
 import { authMiddleware } from "./middlewares/auth.middleware";
+// import jwt from "jsonwebtoken";
 
 // load env variables
 config();
@@ -25,6 +26,8 @@ server.use("/activities", activityRoutes);
 server.use(exceptionHandlerMiddleware);
 
 server.listen(port, () => {
+  // Logger.info('token: ' + jwt.sign({serviceName: 'MIT-FE'}, process.env.JWT_SECRET!, { expiresIn: '1000h' }));
+
   Logger.info(`Server is running on port ${port}`);
 });
 
