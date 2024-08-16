@@ -137,7 +137,7 @@ describe("Worker Controller", () => {
   });
 
   it("should delete a worker", async () => {
-    const mockIsDeleted = true; // Assuming successful deletion
+    const mockIsDeleted = true;
     (workerService.destroy as jest.Mock).mockResolvedValue(mockIsDeleted);
 
     await request(app)
@@ -156,23 +156,22 @@ describe("Worker Controller", () => {
   });
 
   it("should change the activity of a worker", async () => {
-    const mockWorker = { sid: "WK1234567890" }; // Assuming successful update
+    const mockWorker = { sid: "WK1234567890" };
     (workerService.updateActivity as jest.Mock).mockResolvedValue(mockWorker);
 
     await request(app)
       .put("/workers/WK1234567890/change-activity")
-      .send({ activitySid: "ACT67890" }) // Assuming this is the payload structure
+      .send({ activitySid: "ACT67890" })
       .expect(200)
       .then(() => {
         expect(workerService.updateActivity).toHaveBeenCalledWith(
           "WK1234567890",
           "ACT67890",
         );
-
-        // expect(response.success).toHaveBeenCalled();
-        // expect(workerView.one).toHaveBeenCalledWith(
-        //     expect.objectContaining(mockWorker),
-        // );
+        expect(response.success).toHaveBeenCalled();
+        expect(workerView.one).toHaveBeenCalledWith(
+          expect.objectContaining(mockWorker),
+        );
       });
   });
 });
